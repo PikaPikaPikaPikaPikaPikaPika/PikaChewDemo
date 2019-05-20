@@ -1,0 +1,53 @@
+public static void main(String[] args) {
+		//lambda表达式
+		// 前提，一个接口中只有一个抽象方法
+		// 原始方式
+		MyInter my = (double i,double j) ->{
+			return i + j;
+		};
+		
+		// 简便方式
+		// 方法体中只有一行语句，可以省略return和{}
+		MyInter my1 = (double i,double j)-> i + j;
+		
+		// 究极简便格式
+		// 参数列表的类型已经确定的情况下，可以省略数据类型
+		MyInter my2 = (i,j) -> i + j;
+		
+		
+		// 非常规写法，限定条件多，用的极少
+		// 当抽象方法只有一个参数，可以省略小括号
+		MyInter1 my3 = d -> Math.sqrt(d);
+		// 当只有一条语句
+		// 语句中直接操作参数
+		// 方法是特定已有类的静态方法
+		MyInter1 my4 = Math :: sqrt;
+		System.out.println(my4.sqrt(9));
+	}
+
+	public static void demo01() {
+		// 使用匿名内部类来变向的使用向上造型
+		MyInter my = new MyInter() {
+
+			@Override
+			public double add(double a, double b) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+		};
+		System.out.println(MyInter.max(3.14, 5.66));
+	}
+  
+  
+  interface MyInter1{
+	double sqrt(double d);
+}
+
+interface MyInter {
+	double add(double a, double b);
+
+	// 接口中的具体方法实现，可以以default修饰
+	public static double max(double i, double j) {
+		return i > j ? i : j;
+	}
+}
